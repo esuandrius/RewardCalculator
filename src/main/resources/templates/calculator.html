@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Investment calculator</title>
+
+<!--    Bootstrap styling-->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        .error {
+            color:red;
+            font-style: italic
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <form th:action="@{/calculator}" method="post" th:object="${params}">
+            <div class="container">
+
+                <h1>Investment Calculator</h1>
+                <br />
+
+<!--                User input fields and Calculation button-->
+<!--                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+                <div style="width: 25%">
+                    <div class="form-group" >
+                        <label class="control-label" for="investedAmount">
+                            Invest amount (EUR):  </label>
+                        <input id="investedAmount" class="form-control"
+                               th:field="*{investedAmount}" required autofocus="autofocus" type="number" step="0.001" title="Please enter greater than 0.001" />
+                        <span th:if="${#fields.hasErrors('investedAmount')}" th:errors="*{investedAmount}" class="error"></span>
+                    </div>
+                </div>
+
+                <div style="width: 25%">
+                    <div class="form-group" >
+                        <label class="control-label" for="interestRate">
+                            Yearly Staking Reward (%):  </label>
+                        <input id="interestRate" class="form-control"
+                               th:field="*{interestRate}" required autofocus="autofocus" type="number" step="0.01" title="Please enter greater than 0.01"/>
+                        <span th:if="${#fields.hasErrors('interestRate')}" th:errors="*{interestRate}" class="error"></span>
+
+                    </div>
+                </div>
+
+                <div style="width: 25%">
+                    <div class="form-group" >
+                        <label class="control-label" for="startDate">
+                            Start Date (MM/dd/yyyy):  </label>
+                        <input id="startDate" class="form-control"
+                               th:field="*{startDate}" required autofocus="autofocus" type="date"/>
+                        <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="error"></span>
+                    </div>
+                </div>
+
+                <div style="width: 25%">
+                    <div class="form-group" >
+                        <label class="control-label" for="numberOfMonths">
+                            Invest period (months):  </label>
+                        <input id="numberOfMonths" name="numberOfMonths" class="form-control"
+                               th:field="*{numberOfMonths}" required autofocus="autofocus" type="number" step="1"/>
+                        <span th:if="${#fields.hasErrors('numberOfMonths')}" th:errors="*{numberOfMonths}" class="error"></span>
+
+                    </div>
+                </div>
+
+                <div style="width: 25%">
+                    <div class="form-group" >
+                        <label class="control-label" for="reinvestStakingReward"> Reinvest Staking Reward:</label>
+                        <select th:field="*{reinvestStakingReward}" id="reinvestStakingReward" class="form-control" required  autofocus="autofocus">
+                            <option th:value="'0'" >Yes</option>
+                            <option th:value="'1'" >No</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" style="display: flex;  justify-content: space-between;">
+                            <button type="submit" class="btn btn-primary" style="margin-top:25px;" >
+                                Calculate </button>
+                            <a  th:href="@{/calculator/download}" class="btn btn-primary" style="margin-top:25px;" >
+                                Export CSV </a>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
+<!--                Reward schedule calculation table-->
+<!--                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+                <div th:if="${totalRewardAmount != 0}">
+                    <table border="1" style="width: 100%; text-align: center" class = "table table-striped table-responsive-md">
+                        <thead style="background-color: #fbfbea">
+                            <th>Line #</th>
+                            <th>Reward Date</th>
+                            <th>Investment Amount (ETH)</th>
+                            <th>Reward Amount (ETH)</th>
+                            <th>Total Reward Amount to Date (ETH)</th>
+                            <th>Yearly Staking Reward (%)</th>
+                        </thead>
+
+<!--                    Printing list in to table, format numbers with 6 decimal places-->
+                        <tbody>
+                            <tr th:each="reward : ${rewardList}">
+                                <td th:text ="${reward.numberOfMonths}"></td>
+                                <td th:text ="${reward.startDate}"></td>
+                                <td th:text ="${#numbers.formatDecimal(reward.investedAmount, 1, 'COMMA', 6, 'POINT')}"></td>
+                                <td th:text ="${#numbers.formatDecimal(reward.rewardAmount, 1, 'COMMA', 6, 'POINT')}"></td>
+                                <td th:text ="${#numbers.formatDecimal(reward.totalRewardAmount, 1, 'COMMA', 6, 'POINT')}"></td>
+                                <td th:text ="${#numbers.formatDecimal(reward.interestRate, 1, 'COMMA', 2, 'POINT') + '%'}"></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>
