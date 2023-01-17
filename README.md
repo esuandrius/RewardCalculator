@@ -1,4 +1,4 @@
-# ETH Investment Calculator
+# Ethereum Staking profit schedule 
 Simple ETH Investment Calculator with Spring + ThymeLeaf. Calculation based on user data input, fields validation, CSV data export.
 
 ### How to run:
