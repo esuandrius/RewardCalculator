@@ -6,6 +6,8 @@ Simple ETH Investment Calculator with Spring + ThymeLeaf. Calculation based on u
 2. Once imported, run Spring Boot project
 3. Navigate to localhost:8080/calculator, or whatever port is used
 
+4.Project published on Heroku, so you can visit here
+https://reward-calculator.herokuapp.com/calculator
 
 ### Investment Calculator
 ![investment calculator](https://user-images.githubusercontent.com/111871226/212896766-7bf3dd98-e654-4630-b5ca-8057f1bea1cd.PNG)
