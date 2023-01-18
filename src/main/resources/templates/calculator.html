@@ -85,7 +85,7 @@
                         <div class="form-group" style="display: flex;  justify-content: space-between;">
                             <button type="submit" class="btn btn-primary" style="margin-top:25px;" >
                                 Calculate </button>
-                            <a  th:href="@{/calculator/download}" class="btn btn-primary" style="margin-top:25px;" >
+                            <a  th:href="@{/calculator/download}" th:if="${rewardList != null}" class="btn btn-primary" style="margin-top:25px;" >
                                 Export CSV </a>
                         </div>
                         <br />
@@ -94,7 +94,7 @@
 
 <!--                Reward schedule calculation table-->
 <!--                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-                <div th:if="${totalRewardAmount != 0}">
+                <div th:if="${rewardList != null}">
                     <table border="1" style="width: 100%; text-align: center" class = "table table-striped table-responsive-md">
                         <thead style="background-color: #fbfbea">
                             <th>Line #</th>
