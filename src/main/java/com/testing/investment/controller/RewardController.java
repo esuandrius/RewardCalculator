@@ -4,11 +4,14 @@ import com.testing.investment.entity.Reward;
 import com.testing.investment.service.RewardService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
 
@@ -16,13 +19,12 @@ import java.time.LocalDate;
 
 @SessionAttributes({"params"})
 @Controller
-@RequestMapping("/calculator")
+@AllArgsConstructor
 public class RewardController {
 
     //TODO Connects investmentService class
 
-    @Autowired
-    RewardService rewardService;
+    private final RewardService rewardService;
 
 
     @ModelAttribute("params")
@@ -33,7 +35,8 @@ public class RewardController {
 
     // TODO Loads calculator page, when go to localhost:8080/calculator
 
-    @GetMapping
+
+    @GetMapping({"/calculator", "", "/", "/index", "/index.html"})
     public String getParams() {
         return "calculator";
     }
