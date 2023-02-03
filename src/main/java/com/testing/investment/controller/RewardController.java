@@ -8,23 +8,20 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
 // TODO Single Controller with one GET and one POST method
 
+@AllArgsConstructor
 @SessionAttributes({"params"})
 @Controller
-@AllArgsConstructor
+@RequestMapping({"/calculator", "", "/", "/index"})
 public class RewardController {
 
     //TODO Connects investmentService class
-
-    private final RewardService rewardService;
+    RewardService rewardService;
 
 
     @ModelAttribute("params")
@@ -35,8 +32,7 @@ public class RewardController {
 
     // TODO Loads calculator page, when go to localhost:8080/calculator
 
-
-    @GetMapping({"/calculator", "", "/", "/index", "/index.html"})
+    @GetMapping
     public String getParams() {
         return "calculator";
     }

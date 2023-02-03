@@ -20,15 +20,16 @@
 
     <div class="container">
         <form th:action="@{/calculator}" method="post" th:object="${params}">
-            <div class="container">
+            <div class="container d-flex justify-content-center">
 
                 <h1>Investment Calculator</h1>
+                <br />
                 <br />
 
 <!--                User input fields and Calculation button-->
 <!--                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-                <div style="width: 25%">
-                    <div class="form-group" >
+                <div style="width: 35%">
+                    <div class="form-group-lg" >
                         <label class="control-label" for="investedAmount">
                             Invest amount (ETH):  </label>
                         <input id="investedAmount" class="form-control"
@@ -36,9 +37,9 @@
                         <span th:if="${#fields.hasErrors('investedAmount')}" th:errors="*{investedAmount}" class="error"></span>
                     </div>
                 </div>
-
-                <div style="width: 25%">
-                    <div class="form-group" >
+                <br/>
+                <div style="width: 35%">
+                    <div class="form-group-lg" >
                         <label class="control-label" for="interestRate">
                             Yearly Staking Reward (%):  </label>
                         <input id="interestRate" class="form-control"
@@ -47,9 +48,9 @@
 
                     </div>
                 </div>
-
-                <div style="width: 25%">
-                    <div class="form-group" >
+                <br/>
+                <div style="width: 35%">
+                    <div class="form-group-lg" >
                         <label class="control-label" for="startDate">
                             Start Date (MM/dd/yyyy):  </label>
                         <input id="startDate" class="form-control"
@@ -57,20 +58,20 @@
                         <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="error"></span>
                     </div>
                 </div>
-
-                <div style="width: 25%">
-                    <div class="form-group" >
+                <br/>
+                <div style="width: 35%">
+                    <div class="form-group-lg" >
                         <label class="control-label" for="numberOfMonths">
                             Invest period (months):  </label>
-                        <input id="numberOfMonths" name="numberOfMonths" class="form-control"
+                        <input id="numberOfMonths" name="numberOfMonths" class="form-control "
                                th:field="*{numberOfMonths}" required autofocus="autofocus" type="number" step="1"/>
                         <span th:if="${#fields.hasErrors('numberOfMonths')}" th:errors="*{numberOfMonths}" class="error"></span>
 
                     </div>
                 </div>
-
-                <div style="width: 25%">
-                    <div class="form-group" >
+                <br/>
+                <div style="width: 35%">
+                    <div class="form-group-lg" >
                         <label class="control-label" for="reinvestStakingReward"> Reinvest Staking Reward:</label>
                         <select th:field="*{reinvestStakingReward}" id="reinvestStakingReward" class="form-control" required  autofocus="autofocus">
                             <option th:value="'0'" >Yes</option>
@@ -79,13 +80,13 @@
 
                     </div>
                 </div>
-
+                <br/>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="form-group" style="display: flex;  justify-content: space-between;">
+                        <div class="form-group-lg" style="display: flex;  justify-content: space-between;">
                             <button type="submit" class="btn btn-primary btn-lg" style="margin-top:25px;" >
                                 Calculate </button>
-                            <a  th:href="@{/calculator/download}" th:if="${rewardList != null}" class="btn btn-primary" style="margin-top:25px;" >
+                            <a  th:href="@{/calculator/download}" th:if="${rewardList != null}" class="btn btn-lg btn-primary" style="margin-top:25px;" >
                                 Export CSV </a>
                         </div>
                         <br />
